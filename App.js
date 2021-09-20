@@ -1,18 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import Category from './src/category';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Category name='Item 1' />
-      <Category name='Item 2' />
-      <Category name='Item 3' />
-      <Category name='Item 4' />
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component {
+  constructor(props) {
+    idNum = 0;
+    super(props);
+    this.state = {
+      categories: [
+        { id: ++idNum, name: 'Item 1'},
+        { id: ++idNum, name: 'Item 2'},
+        { id: ++idNum, name: 'Item 3'},
+        { id: ++idNum, name: 'Item 4'},
+        { id: ++idNum, name: 'Item 5'},
+        { id: ++idNum, name: 'Item 6'}
+      ]
+    };
+  }
+
+  render () {
+    const { categories } = this.state;
+    return (
+      <View style={styles.container}>
+        <FlatList 
+          data={categories}
+          renderItem={({item}) => <Category category={item} /> }
+          keyExtractor={item => `${item.id}`}
+          contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}
+        />
+      </View>
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -22,7 +42,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignItems: 'stretch',
-    paddingLeft: 16,
-    paddingRight: 16
   },
 });

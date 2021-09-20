@@ -3,9 +3,10 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import CategoryImage from '../assets/categories.png'
 
 export default function Category(props){
+    const { category } = props
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{props.name}</Text>
+            <Text style={styles.title}>{category.name}</Text>
             <Image style={styles.categoryImgStyle} source={CategoryImage}></Image>
         </View>
        
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: {width: 0, height: 0},
         elevation: 10,
-        marginBottom: 20
+        marginTop: 30
     },
 
     title: {
